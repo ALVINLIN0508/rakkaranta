@@ -23,6 +23,15 @@ cd rakkaranta
 
 ## Usage
 
+### Running the Demo
+
+To see the hotel booking system in action without user interaction:
+```bash
+python demo.py
+```
+
+This will demonstrate all features including adding rooms, creating bookings, viewing availability, and canceling bookings.
+
 ### Running the Application
 
 Run the main application:
@@ -107,6 +116,7 @@ python -m unittest test_hotel_booking.py -v
 rakkaranta/
 ├── hotel_booking.py       # Core classes (Room, Booking, Hotel)
 ├── main.py               # CLI application
+├── demo.py               # Non-interactive demonstration
 ├── test_hotel_booking.py # Unit tests
 └── README.md            # This file
 ```
