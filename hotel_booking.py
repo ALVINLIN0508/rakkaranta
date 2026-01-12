@@ -89,7 +89,15 @@ class Hotel:
             
         Returns:
             The created Room object
+            
+        Raises:
+            ValueError: If room_number is empty or price is not positive
         """
+        if not room_number or not room_number.strip():
+            raise ValueError("Room number cannot be empty")
+        if price <= 0:
+            raise ValueError("Price must be positive")
+        
         room = Room(room_number, room_type, price)
         self.rooms.append(room)
         return room
@@ -132,6 +140,10 @@ class Hotel:
         Returns:
             Booking object if successful, None otherwise
         """
+        if not guest_name or not guest_name.strip():
+            print("Error: Guest name cannot be empty.")
+            return None
+        
         room = self.find_room(room_number)
         
         if not room:

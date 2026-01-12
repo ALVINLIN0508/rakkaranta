@@ -42,8 +42,11 @@ def add_room(hotel: Hotel):
         print("Error: Invalid price.")
         return
     
-    room = hotel.add_room(room_number, room_type, price)
-    print(f"Successfully added: {room}")
+    try:
+        room = hotel.add_room(room_number, room_type, price)
+        print(f"Successfully added: {room}")
+    except ValueError as e:
+        print(f"Error: {e}")
 
 
 def view_available_rooms(hotel: Hotel):
@@ -92,6 +95,8 @@ def book_room(hotel: Hotel):
     booking = hotel.book_room(guest_name, room_number, check_in, check_out)
     if booking:
         print(f"Successfully created: {booking}")
+    else:
+        print("Booking failed. Please check the error message above.")
 
 
 def view_all_bookings(hotel: Hotel):
@@ -123,6 +128,8 @@ def cancel_booking(hotel: Hotel):
         booking_id = int(input("\nEnter booking ID to cancel: "))
         if hotel.cancel_booking(booking_id):
             print(f"Successfully cancelled booking #{booking_id}.")
+        else:
+            print("Cancellation failed. Please check the error message above.")
     except ValueError:
         print("Error: Invalid booking ID.")
 

@@ -88,6 +88,22 @@ class TestHotel(unittest.TestCase):
         self.assertEqual(room.room_type, "Single")
         self.assertEqual(room.price, 100.0)
     
+    def test_add_room_invalid_room_number(self):
+        """Test adding a room with empty room number."""
+        with self.assertRaises(ValueError):
+            self.hotel.add_room("", "Single", 100.0)
+        
+        with self.assertRaises(ValueError):
+            self.hotel.add_room("   ", "Single", 100.0)
+    
+    def test_add_room_invalid_price(self):
+        """Test adding a room with invalid price."""
+        with self.assertRaises(ValueError):
+            self.hotel.add_room("101", "Single", 0.0)
+        
+        with self.assertRaises(ValueError):
+            self.hotel.add_room("101", "Single", -100.0)
+    
     def test_find_room(self):
         """Test finding a room by room number."""
         self.hotel.add_room("101", "Single", 100.0)
@@ -156,6 +172,18 @@ class TestHotel(unittest.TestCase):
         check_out = datetime(2026, 1, 15)
         
         booking = self.hotel.book_room("John Doe", "101", check_in, check_out)
+        self.assertIsNone(booking)
+    
+    def test_book_room_empty_guest_name(self):
+        """Test booking with empty guest name."""
+        self.hotel.add_room("101", "Single", 100.0)
+        check_in = datetime(2026, 1, 15)
+        check_out = datetime(2026, 1, 17)
+        
+        booking = self.hotel.book_room("", "101", check_in, check_out)
+        self.assertIsNone(booking)
+        
+        booking = self.hotel.book_room("   ", "101", check_in, check_out)
         self.assertIsNone(booking)
     
     def test_cancel_booking_success(self):
